@@ -1,0 +1,221 @@
+-- MySQL dump 10.13  Distrib 8.0.31, for macos12 (arm64)
+--
+-- Host: localhost    Database: BIOTECH_LAB
+-- ------------------------------------------------------
+-- Server version	8.0.31
+​
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+​
+--
+-- Table structure for table `delivery_time`
+--
+​
+DROP TABLE IF EXISTS `delivery_time`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `delivery_time` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Last_Update` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+​
+--
+-- Dumping data for table `delivery_time`
+--
+​
+LOCK TABLES `delivery_time` WRITE;
+/*!40000 ALTER TABLE `delivery_time` DISABLE KEYS */;
+/*!40000 ALTER TABLE `delivery_time` ENABLE KEYS */;
+UNLOCK TABLES;
+​
+--
+-- Table structure for table `department`
+--
+​
+DROP TABLE IF EXISTS `department`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `department` (
+  `ID` varchar(10) NOT NULL,
+  `Name` varchar(60) DEFAULT NULL,
+  `Employee_ID` varchar(10) DEFAULT NULL,
+  `Address` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_Employee_ID` (`Employee_ID`),
+  CONSTRAINT `FK_Employee_ID` FOREIGN KEY (`Employee_ID`) REFERENCES `employees` (`Employee_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+​
+--
+-- Dumping data for table `department`
+--
+​
+LOCK TABLES `department` WRITE;
+/*!40000 ALTER TABLE `department` DISABLE KEYS */;
+INSERT INTO `department` VALUES ('BCP 771','Biomaterial','BIO13021','Building A'),('BCP 772','Cancer biotechnology','BIO13022','Building C'),('BCP 773','Cardiovascular biology','BIO13023','Building E'),('BCP 774','Transplantation biology','BIO13024','Building B'),('BCP 775','Cell and molecular biology','BIO13025','Building B'),('BCP 776','Neurobiology','BIO13026','Building A'),('BCP 777','Developmental Biology','BIO13027','Building C'),('BCP 778','Stem Cell Biology','BIO13028','Building F'),('BCP 779','Drug Devices','BIO13029','Building E'),('BCP 780','Synthetic Biology','BIO13030','Buiilding B'),('BCP 781','Drug Discovery','BIO13031','Building D'),('BCP 782','Drug Research','BIO13032','Building D'),('BCP 783','Nanobiotechnology','BIO13033','Building F');
+/*!40000 ALTER TABLE `department` ENABLE KEYS */;
+UNLOCK TABLES;
+​
+--
+-- Temporary view structure for view `department_code`
+--
+​
+DROP TABLE IF EXISTS `department_code`;
+/*!50001 DROP VIEW IF EXISTS `department_code`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `department_code` AS SELECT 
+ 1 AS `ID`,
+ 1 AS `Funds_2021`,
+ 1 AS `Funds_2022`,
+ 1 AS `Funds_2023`*/;
+SET character_set_client = @saved_cs_client;
+​
+--
+-- Table structure for table `employees`
+--
+​
+DROP TABLE IF EXISTS `employees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `employees` (
+  `Employee_ID` varchar(10) NOT NULL,
+  `Name` varchar(40) DEFAULT NULL,
+  `Department` varchar(10) DEFAULT NULL,
+  `Salary` float DEFAULT NULL,
+  `work_Mode` enum('Office','Hybrid','Remote') DEFAULT NULL,
+  PRIMARY KEY (`Employee_ID`),
+  KEY `FK_Department` (`Department`),
+  CONSTRAINT `FK_Department` FOREIGN KEY (`Department`) REFERENCES `department` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+​
+--
+-- Dumping data for table `employees`
+--
+​
+LOCK TABLES `employees` WRITE;
+/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+INSERT INTO `employees` VALUES ('BIO13021','Vicky Richard','BCP 771',100000,'Office'),('BIO13022','Donna Trombey','BCP 772',56000,'Office'),('BIO13023','Valancia Terry','BCP 773',99000,'Office'),('BIO13024','Jerry Pinto','BCP 774',87560,'Office'),('BIO13025','Albus Nicholas','BCP 775',45000,'Hybrid'),('BIO13026','Peter Billy','BCP 776',76895,'Remote'),('BIO13027','Flora Duncan','BCP 777',200400,'Hybrid'),('BIO13028','Kaly Bombay','BCP 778',56400,'Remote'),('BIO13029','Zubeda Ali','BCP 779',76000,'Office'),('BIO13030','Baako Elrod','BCP 780',76599,'Hybrid'),('BIO13031','Hector Vitz','BCP 781',66590,'Office'),('BIO13032','Alex Delgrado','BCP 782',845600,'Office'),('BIO13033','Bainca Smith','BCP 783',75000,'Remote'),('BIO13034','Deb Patel','BCP 780',46000,'Remote'),('BIO13035','Zoyi Atkins','BCP 779',23000,'Hybrid'),('BIO13036','Kai Judith','BCP 772',63900,'Hybrid'),('BIO13037','Eliana Harrington','BCP 772',45000,'Office'),('BIO13038','Jayden Jose','BCP 774',34768,'Remote'),('BIO13039','Ezra Fletcher','BCP 776',123000,'Hybrid'),('BIO13040','Luca Russell','BCP 777',56300,'Office'),('BIO13041','Rowan Florian','BCP 778',33900,'Remote'),('BIO13042','Nova Yuleen','BCP 773',24600,'Remote'),('BIO13043','Amara Quinn','BCP 783',56890,'Remote'),('BIO13044','Sussie Adams','BCP 781',34789,'Office'),('BIO13045','Leona Aniston','BCP 783',45670,'Office'),('BIO13046','Jennifer Muriel','BCP 780',50000,'Hybrid'),('BIO14047','Sheldon Cooper','BCP 779',114000,'Remote'),('BIO14048','Howard Dickinson','BCP 772',234500,'Office'),('BIO14049','Amy Rotts','BCP 772',56700,'Hybrid'),('BIO14050','Paul Roberts','BCP 774',89046,'Office'),('BIO14051','Ruby Hogger','BCP 776',97678,'Remote'),('BIO14052','Ricky Vasco','BCP 777',95378,'Remote'),('BIO14053','Ruth Malfoy','BCP 778',46799,'Office'),('BIO14054','Monica Bing','BCP 773',47860,'Hybrid'),('BIO14055','Ross Geller','BCP 783',35890,'Hybrid');
+/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
+UNLOCK TABLES;
+​
+--
+-- Table structure for table `equipment`
+--
+​
+DROP TABLE IF EXISTS `equipment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `equipment` (
+  `E_ID` varchar(10) NOT NULL,
+  `Name` varchar(60) DEFAULT NULL,
+  `Cost` float DEFAULT NULL,
+  `Quantity_Required` int DEFAULT NULL,
+  PRIMARY KEY (`E_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+​
+--
+-- Dumping data for table `equipment`
+--
+​
+LOCK TABLES `equipment` WRITE;
+/*!40000 ALTER TABLE `equipment` DISABLE KEYS */;
+INSERT INTO `equipment` VALUES ('BT001','PCR tube',142.85,24),('BT002','Bunsen burner',8.2,10),('BT003','Petri dish',3.95,12),('BT004','Auto clave',132.44,4),('BT005','Water bath',52,1),('BT006','Incubator',39,5),('BT007','Cryo tube',323.59,12),('BT008','Themocycler Real-Time PCR',1345.67,1),('BT009','Growth chamber',45.89,2),('BT010','Water Purifier',23.1,5),('BT011','Ultra Flow Freezer',4.97,3),('BT012','Microcentrifuge',132.87,4),('BT013','Ice Maker',45.56,5),('BT014','Multi-mode microplate reader',30000,1),('BT015','Agarose Gel Electrophoresis Systems',45,7),('BT016','Ethidium bromide',125.5,45),('BT017','SYBR Safe DNA gel stain',35.75,12),('BT018','10x TGS Buffer',180.25,5),('BT019','Chelex 100 Resin',47,7),('BT020','Human APO-1/FAS Elisa Kit',23.35,5),('BT021','LB Broth',325,50),('BT022','DNA Purification Kit Agarose-out',27,7),('BT023','Agarose',297,7);
+/*!40000 ALTER TABLE `equipment` ENABLE KEYS */;
+UNLOCK TABLES;
+​
+--
+-- Table structure for table `experiments`
+--
+​
+DROP TABLE IF EXISTS `experiments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `experiments` (
+  `P_ID` varchar(10) DEFAULT NULL,
+  `P_Name` varchar(40) DEFAULT NULL,
+  `Experiment` varchar(60) DEFAULT NULL,
+  `Employee` varchar(10) DEFAULT NULL,
+  KEY `FK_ex_Employee` (`Employee`),
+  KEY `FK_ex_P_ID` (`P_ID`),
+  CONSTRAINT `FK_Employee` FOREIGN KEY (`Employee`) REFERENCES `employees` (`Employee_ID`),
+  CONSTRAINT `FK_ex_Employee` FOREIGN KEY (`Employee`) REFERENCES `employees` (`Employee_ID`),
+  CONSTRAINT `FK_ex_P_ID` FOREIGN KEY (`P_ID`) REFERENCES `procedures` (`P_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+​
+--
+-- Dumping data for table `experiments`
+--
+​
+LOCK TABLES `experiments` WRITE;
+/*!40000 ALTER TABLE `experiments` DISABLE KEYS */;
+INSERT INTO `experiments` VALUES ('PCODE 01','DNA EXTRACTION','Protein isolation','BIO13026'),('PCODE 02','STERILIZATION','Adjustment of buffer\'s pH','BIO13043'),('PCODE 03','CELLL CULTURE','Cell propagation','BIO13021'),('PCODE 04','DISINFECTION','Quantitative carbohydrate analysis','BIO13024'),('PCODE 05','INCUBATING SAMPLES','Determination of total protein by spectrophotometry','BIO13042'),('PCODE 06','FUNGI GROWTH','Effect of temperature on bacteria growth','BIO14055'),('PCODE 07','TISSUE CULTURE','Seperation of amino acids','BIO13031'),('PCODE 08','QUANTITAIVE PCR ANALYSIS','Ascending chromatogrphy','BIO13025'),('PCODE 09','CONTROLLED GROWTH','Separation of plant pigment','BIO13044'),('PCODE 10','DISTILLED WATER','Estimation of gucose','BIO13036'),('PCODE 11','SAMPLE PREPARATION','Circular paper chromatography','BIO13046'),('PCODE12','SAMPLE PREPARATION','Construction of Maltose','BIO14052'),('PCODE 13','ICE MAKING','Measurement of antibody concentration in a blood sample','BIO13027');
+/*!40000 ALTER TABLE `experiments` ENABLE KEYS */;
+UNLOCK TABLES;
+​
+--
+-- Table structure for table `funding`
+--
+​
+DROP TABLE IF EXISTS `funding`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `funding` (
+  `ID` varchar(20) DEFAULT NULL,
+  `Name` text,
+  `Funds_2021` float DEFAULT NULL,
+  `Cost_2021` float DEFAULT NULL,
+  `Funds_2022` float DEFAULT NULL,
+  `Cost_2022` float DEFAULT NULL,
+  `Funds_2023` float DEFAULT NULL,
+  `STATUS` enum('Y','N') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+​
+--
+-- Dumping data for table `funding`
+--
+​
+LOCK TABLES `funding` WRITE;
+/*!40000 ALTER TABLE `funding` DISABLE KEYS */;
+INSERT INTO `funding` VALUES ('BCP 771','Biomaterial',3.4,3.5,3.6,3.7,4.5,'Y'),('BCP 772','Cancer biotechnology',11.45,11.56,9.56,4.56,10.45,'Y'),('BCP 773','Cardiovascular biology',3.4,1.45,3.56,1.67,2.4,'Y'),('BCP 774','Transplantation biology',6.7,2.9,3.6,1.2,7.98,'N'),('BCP 775','Cell and molecular biology',18,16.45,23.4,14.98,23.56,'N'),('BCP 776','Neurobiology',23.2,15.65,11.56,9.45,3.67,'Y'),('BCP 777','Developmental Biology',2.4,1.5,6.98,3.65,2.3,'Y'),('BCP 778','Stem Cell Biology',3.56,2.9,1.57,1.34,8.45,'N'),('BCP 779','Drug Devices',4.67,1.3,4.36,1.2,8.45,'N'),('BCP 780','Synthetic Biology',5.78,3.2,7.21,3.45,2.45,'Y'),('BCP 781','Drug Discovery',2.3,1.87,1.45,1.15,1.56,'N'),('BCP 782','Drug Research',2.45,1.3,4.78,2.34,8.1,'Y'),('BCP 783','Nanobiotechnology',5.56,3.23,5.4,4.47,3.78,'N');
+/*!40000 ALTER TABLE `funding` ENABLE KEYS */;
+UNLOCK TABLES;
+​
+--
+-- Table structure for table `orders`
+--
+​
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `Order_ID` varchar(10) NOT NULL,
+  `Supplier` varchar(10) DEFAULT NULL,
+  `Time_of_order` timestamp NULL DEFAULT NULL,
+  `Equipment` varchar(10) DEFAULT NULL,
+  `Quantity` int DEFAULT NULL,
+  `Price` float DEFAULT NULL,
+  `Total_Bill` float DEFAULT NULL,
+  `Delivery_Date` text,
+  `Delivery_Status` enum('Y','N','C') DEFAULT NULL,
+  PRIMARY KEY (`Order_ID`),
+  KEY `FK_Supplier` (`Supplier`),
+  KEY `FK_O_equipment` (`Equipment`),
+  CONSTRAINT `FK_O_equipment` FOREIGN KEY (`Equipment`) REFERENCES `equipment` (`E_ID`),
+  CONSTRAINT `FK_Supplier` FOREIGN KEY (`Supplier`) REFERENCES `suppliers` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 ...
